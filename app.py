@@ -6,4 +6,4 @@ if name.lower() in ["κώστας","γιάννης","αλέξανδρος"]:
     st.write("Καλώς όρισες " + name)
 else:
     st.write("Δεν είσαι στην λίστα " + name)
-    st.success(f"Δεν είσαι στην λίστα {name}!")
+    st.declined(f"Δεν είσαι στην λίστα {name}!")
