@@ -1,12 +1,6 @@
 import streamlit as st
 
-st.title("Το πρώτο μου web App")
-st.write("Καλώς ήρθατε στην εφαρμογή μου.")
-
-name = st.text_input("Πώς σε λένε ;")
-
-if name:
-  st.write(f"Γεία σου {name}! Φτιάχνω αυτό το app με την Python!")
-  if st.button ("Πάτα για μια έκπληξη"):
-    st.fire()
- 
+with st.status("Γίνεται έλεγχος των δεδομένων..."):
+    st.write("Αναζήτηση στη βάση δεδομένων...")
+    time.sleep(2) # Χρειάζεται το import time στην αρχή
+    st.write("Επιτυχής σύνδεση!")
