@@ -1,9 +1,24 @@
 import streamlit as st
+import datetime
 
-name = st.text_input("Παρακαλώ γράψε το όνομα σου :")
-if name.lower() in ["κώστας","γιάννης","αλέξανδρος"]:
-    st.success(f"Καλώς όρισες {name}!")
-    st.write("Καλώς όρισες " + name)
-else:
-    st.write("Δεν είσαι στην λίστα " + name)
-    st.declined(f"Δεν είσαι στην λίστα {name}!")
+# Τίτλος του App
+st.title("Το Ψηφιακό μου Ρολόι 🕒")
+
+# Παίρνουμε την τρέχουσα ημερομηνία και ώρα
+tora = datetime.datetime.now()
+
+# Δημιουργούμε το κείμενο για την ημερομηνία και την ώρα
+imerominia = f"{tora.day}/{tora.month}/{tora.year}"
+ora = f"{tora.hour + 2:02d}:{tora.minute:02d}" # Το :02d κρατάει δύο ψηφία (π.χ. 09 αντί για 9)
+
+# Εμφάνιση στο Streamlit με όμορφα πλαίσια
+st.metric(label="Ημερομηνία", value=imerominia)
+st.metric(label="Ώρα (Ελλάδος)", value=ora)
+
+# Προσθέτουμε και ένα μήνυμα επιτυχίας
+st.success("Το ρολόι λειτουργεί κανονικά!")
+
+# Αν θέλει να κάνει το App να ανανεώνεται, μπορεί να πατήσει το κουμπί
+if st.button("Ανανέωση Ώρας"):
+    st.rerun()
+
