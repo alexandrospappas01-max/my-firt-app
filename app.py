@@ -1,11 +1,14 @@
 import streamlit as st
 import datetime
+import time
 
 # Τίτλος του App
 st.title("Το Ψηφιακό μου Ρολόι 🕒")
 
 
 st.success("Κατασκευή : Αλέξανδρος Παππάς!")
+
+placeholder = st.empty()
 
 # Παίρνουμε την τρέχουσα ημερομηνία και ώρα
 while True:
