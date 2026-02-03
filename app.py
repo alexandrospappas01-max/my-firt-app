@@ -20,7 +20,6 @@ while True:
     with placeholder.container():
         st.metric(label="Ημερομηνία", value=imerominia)
         st.metric(label="Ώρα (Ελλάδος)", value=ora)
-
+st.write("Τωρα τρέχουν και τα δευτερόλεπτα")
     # Περίμενε 1 δευτερόλεπτο
     time.sleep(1)
-st.write("Τώρα τρεχουν και τα δευτερόλεπτα")
