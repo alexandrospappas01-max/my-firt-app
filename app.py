@@ -12,7 +12,7 @@ tora = datetime.datetime.now()
 
 # Δημιουργούμε το κείμενο για την ημερομηνία και την ώρα
 imerominia = f"{tora.day}/{tora.month}/{tora.year}"
-ora = f"{tora.hour + 2:02d}:{tora.minute:02d}" # Το :02d κρατάει δύο ψηφία (π.χ. 09 αντί για 9)
+ora = f"{tora.hour + 2:02d}:{tora.minute:02d}" : {tora.second:02d} # Το :02d κρατάει δύο ψηφία (π.χ. 09 αντί για 9)
 
 # Εμφάνιση στο Streamlit με όμορφα πλαίσια
 st.metric(label="Ημερομηνία", value=imerominia)
