@@ -5,7 +5,7 @@ import datetime
 st.title("Το Ψηφιακό μου Ρολόι 🕒")
 
 
-st.success("κατασκευή Αλέξανδρος Παππάς!")
+st.success("Κατασκευή : Αλέξανδρος Παππάς!")
 
 # Παίρνουμε την τρέχουσα ημερομηνία και ώρα
 tora = datetime.datetime.now()
