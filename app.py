@@ -3,7 +3,7 @@ import datetime
 import time
 
 # Ρύθμιση για συμπαγή εμφάνιση
-st.set_page_config(page_title="School Clock", layout="centered")
+st.set_page_config(page_title="School Clock & Schedule", layout="centered")
 
 # --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ ΠΙΟ ΨΗΛΑ ---
 st.markdown(
@@ -12,7 +12,7 @@ st.markdown(
     .footer {
         position: fixed;
         left: 0;
-        bottom: 100px; /* Ανέβηκε πιο πάνω από το προηγούμενο */
+        bottom: 100px;
         width: 100%;
         text-align: right;
         padding-right: 20px;
@@ -21,13 +21,14 @@ st.markdown(
         color: #4F4F4F;
     }
     </style>
-    <div class="footer">Programaized by : Κωνσταντίνος Παππάς</div>
+    <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
     """,
     unsafe_allow_html=True
 )
 
 # --- ΚΥΡΙΩΣ ΠΡΟΓΡΑΜΜΑ ---
-st.subheader("🕒 Το Έξυπνο Ρολόι μου")
+# Ο νέος ανανεωμένος τίτλος
+st.subheader("🕒 Έξυπνο Ρολόι & Πρόγραμμα Μαθημάτων")
 
 imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
@@ -52,7 +53,7 @@ while True:
     time_placeholder.caption(f"⏰ **{ora_full}**")
     
     with school_placeholder.container():
-        st.write(f"**Πρόγραμμα Σήμερα: {onoma_meras}**")
+        st.write(f"**Μαθήματα Ημέρας: {onoma_meras}**")
         
         if mera_num == 0: # Δευτέρα
             mathimata = ["1η Λογοτεχνία", "2η Μαθηματικά", "3η Ιστορία", "4η Γεωγραφία", "5η Οδύσσεια", "6η Γεωγραφία"]
