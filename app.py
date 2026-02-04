@@ -9,7 +9,6 @@ st.set_page_config(page_title="School Schedule", layout="centered")
 st.markdown(
     """
     <style>
-    /* Κατεβάζουμε όλο το περιεχόμενο 2-3 γραμμές πιο κάτω */
     .block-container {
         padding-top: 4.5rem; 
         padding-bottom: 5rem;
@@ -20,20 +19,19 @@ st.markdown(
         margin-bottom: 0px;
         line-height: 1.1;
     }
-    /* Το μενού επιλογής */
     .stSelectbox {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    /* Ανεβάζουμε τον πίνακα για να μην έχει κενό */
+    /* Κατεβάζουμε τον πίνακα 1 γραμμή πιο κάτω */
     .stTable {
-        margin-top: -25px;
+        margin-top: 10px; /* Από -25px το κάναμε θετικό για να κατέβει */
     }
+    /* Προσθήκη κενού στη διαχωριστική γραμμή */
     hr {
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
     }
-    /* Programmed by: Σταθερά ψηλά για το κινητό */
     .footer {
         position: fixed;
         left: 0;
@@ -66,7 +64,6 @@ def get_mathimata(mera_idx):
 
 imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
-# Το μενού επιλογής
 option = st.selectbox(
     "📅 Επιλογή ημέρας:",
     ["Αυτόματα (Σήμερα & Αύριο)"] + imeres_gr
@@ -90,17 +87,14 @@ while True:
         titlos_2 = "Επόμενη"
 
     with placeholder.container():
-        # Ρολόι
         st.markdown("<h3 class='centered-text'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='centered-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='centered-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
         
-        # Τίτλος Προγράμματος
         st.markdown(f"<h4 class='centered-text'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
         
         st.divider()
 
-        # Πίνακας
         math_1 = get_mathimata(mera_deikshs_1)
         math_2 = get_mathimata(mera_deikshs_2)
         
