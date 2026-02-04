@@ -38,22 +38,26 @@ st.markdown(
         font-weight: bold;
     }
 
+    /* Ρύθμιση για να ανέβει το Πρόγραμμα και ο πίνακας μισή γραμμή πάνω */
+    .program-header {
+        margin-top: -5px !important; /* Ανέβασμα τίτλου */
+    }
+
     .stTable {
         background-color: white !important;
         border-radius: 15px !important;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
         padding: 10px;
-        margin-top: -5px;
+        margin-top: -10px; /* Ανέβασμα πίνακα ακόμα πιο κοντά */
     }
 
     hr {
-        margin-top: 10px !important;
-        margin-bottom: 10px !important;
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
         border-top: 2px solid #1e3a8a !important;
         opacity: 0.2;
     }
 
-    /* Programmed by: Μισή γραμμή κάτω (από 75px σε 65px) και ΜΑΥΡΑ γράμματα */
     .footer {
         position: fixed;
         left: 0;
@@ -63,8 +67,8 @@ st.markdown(
         padding-right: 20px;
         font-size: 14px;
         font-weight: bold;
-        color: #000000; /* ΜΑΥΡΟ ΧΡΩΜΑ */
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9); /* Λευκή σκιά για να φαίνεται στο μπλε */
+        color: #000000;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
         z-index: 999;
     }
     </style>
@@ -116,7 +120,8 @@ while True:
         st.markdown(f"<h5 class='black-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='black-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
         
-        st.markdown(f"<h4 class='centered-text' style='margin-top:10px;'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
+        # Εφαρμογή της κλάσης program-header για να ανέβει
+        st.markdown(f"<h4 class='centered-text program-header'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
         
         st.divider()
 
