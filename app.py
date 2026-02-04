@@ -5,57 +5,69 @@ import time
 # Ρύθμιση σελίδας
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ΜΕ ΧΡΩΜΑ ΣΤΟ BACKGROUND ---
+# --- STYLE ΓΙΑ ΑΝΑΔΕΙΞΗ ΓΡΑΜΜΑΤΩΝ & ΔΙΠΛΟ GRADIENT ---
 st.markdown(
     """
     <style>
-    /* Ορισμός φόντου για όλη την εφαρμογή */
     .stApp {
-        background: linear-gradient(to bottom, #e0f2fe, #f8fafc); /* Απαλό γαλάζιο προς λευκό */
+        /* Διαβάθμιση: Σκούρο μπλε πάνω/κάτω, πολύ ανοιχτό στο κέντρο */
+        background: linear-gradient(180deg, #1e3a8a 0%, #f0f9ff 35%, #f0f9ff 65%, #1e3a8a 100%);
+        background-attachment: fixed;
     }
     
     .block-container {
-        padding-top: 3.5rem; 
+        padding-top: 3rem; 
         padding-bottom: 5rem;
     }
     
+    /* Ανάδειξη τίτλων με σκιά για να "βγαίνουν" μπροστά */
     .centered-text {
         text-align: center;
         margin-top: 0px;
         margin-bottom: 0px;
-        line-height: 1.1;
-        color: #1e3a8a; /* Σκούρο μπλε γράμματα για να ταιριάζουν */
+        line-height: 1.2;
+        color: #0f172a;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Ο τίτλος στην κορυφή που είναι πάνω στο σκούρο χρώμα */
+    .top-title {
+        color: #ffffff !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
     }
 
-    /* Στυλ για τον πίνακα να φαίνεται καθαρά πάνω στο χρώμα */
+    /* Πίνακας με έντονο λευκό φόντο και σκιές στις γωνίες */
     .stTable {
-        background-color: rgba(255, 255, 255, 0.6); /* Ημιδιάφανο λευκό */
-        border-radius: 10px;
-        padding: 10px;
-        margin-top: 10px;
+        background-color: white !important;
+        border-radius: 15px !important;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-top: 15px;
     }
 
     .stSelectbox {
-        margin-top: 10px;
-        margin-bottom: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
     }
 
     hr {
-        margin-top: 20px !important;
-        margin-bottom: 20px !important;
-        border-top: 2px solid #bae6fd !important;
+        border-top: 2px solid #1e3a8a !important;
+        opacity: 0.2;
     }
 
+    /* Programmed by: Λευκά γράμματα γιατί είναι πάνω στο σκούρο μπλε κάτω μέρος */
     .footer {
         position: fixed;
         left: 0;
-        bottom: 60px; 
+        bottom: 50px; 
         width: 100%;
         text-align: right;
         padding-right: 20px;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: bold;
-        color: #1e3a8a;
+        color: #ffffff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         z-index: 999;
     }
     </style>
@@ -103,11 +115,12 @@ while True:
         titlos_2 = f"Επόμενη ({onoma_epomeni})"
 
     with placeholder.container():
-        st.markdown("<h3 class='centered-text'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h5 class='centered-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h5 class='centered-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
+        # Εδώ χρησιμοποιούμε την κλάση 'top-title' για τα πάνω γράμματα
+        st.markdown("<h3 class='centered-text top-title'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h5 class='centered-text top-title'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
+        st.markdown(f"<h5 class='centered-text top-title'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
         
-        st.markdown(f"<h4 class='centered-text'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
+        st.markdown(f"<h4 class='centered-text' style='margin-top:15px;'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
         
         st.divider()
 
