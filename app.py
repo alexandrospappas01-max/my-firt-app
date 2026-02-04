@@ -1,29 +1,14 @@
 import streamlit as st
 import datetime
 import time
-import pandas as pd
 
 # Ρύθμιση σελίδας
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ΓΙΑ ΜΕΓΑΛΑ ΓΡΑΜΜΑΤΑ & ΟΝΟΜΑ ---
+# --- STYLE ---
 st.markdown(
     """
     <style>
-    /* Μεγαλώνει τον τίτλο */
-    .big-title {
-        font-size: 24px !important;
-        font-weight: bold;
-        color: #31333F;
-        margin-bottom: 10px;
-    }
-    /* Μεγαλώνει το κείμενο μέσα στον πίνακα */
-    .stTable td {
-        font-size: 18px !important;
-    }
-    .stTable th {
-        font-size: 20px !important;
-    }
     .footer {
         position: fixed;
         left: 0;
@@ -31,9 +16,13 @@ st.markdown(
         width: 100%;
         text-align: right;
         padding-right: 20px;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: bold;
         color: #4F4F4F;
+    }
+    /* Στοίχιση κειμένου στο κέντρο για τον τίτλο και το ρολόι */
+    .centered-text {
+        text-align: center;
     }
     </style>
     <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
@@ -62,28 +51,28 @@ while True:
     imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
     with placeholder.container():
-        # Μεγάλος Τίτλος
-        st.markdown('<div class="big-title">🕒 Έξυπνο Ρολόι &                                Πρόγραμμα Μαθημάτων</div>', unsafe_allow_html=True)
+        # 1. Τίτλος σε δύο γραμμές
+        st.markdown("<h3 class='centered-text'>🕒 Έξυπνο Ρολόι &</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 class='centered-text'>Πρόγραμμα Μαθημάτων</h3>", unsafe_allow_html=True)
         
-        # Μεγάλο πλαίσιο ώρας
-        st.info(f"### 📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}                    ⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}")
+        # 2. Ημερομηνία και από κάτω Ώρα
+        st.markdown(f"<h4 class='centered-text'>📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}</h4>", unsafe_allow_html=True)
+        st.markdown(f"<h2 class='centered-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h2>", unsafe_allow_html=True)
         
-        st.write("---")
+        st.divider()
 
-        # Δημιουργία Πίνακα με αρίθμηση από το 1
+        # 3. Πίνακας Μαθημάτων
         math_tora = get_mathimata(mera_tora)
         math_avrio = get_mathimata(mera_avrio)
         
-        # Φτιάχνουμε τα δεδομένα
-        df = pd.DataFrame({
-            "Σήμερα": math_tora,
-            "Αύριο": math_avrio
-        })
+        data = []
+        for i in range(len(math_tora)):
+            data.append({
+                "Ώρα": f"{i+1}η",
+                "Σήμερα": math_tora[i],
+                "Αύριο": math_avrio[i]
+            })
         
-        # Αλλάζουμε το "0, 1, 2" σε "1η, 2η, 3η..."
-        df.index = [f"{i+1}η" for i in range(len(df))]
-        
-        # Εμφάνιση πίνακα
-        st.table(df)
+        st.table(data)
 
     time.sleep(1)
