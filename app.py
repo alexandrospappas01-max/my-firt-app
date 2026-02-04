@@ -5,19 +5,20 @@ import time
 # Ρύθμιση για συμπαγή εμφάνιση
 st.set_page_config(page_title="School Clock", layout="centered")
 
-# --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ ΚΑΤΩ ΔΕΞΙΑ ---
+# --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ ΠΙΟ ΨΗΛΑ ---
 st.markdown(
     """
     <style>
     .footer {
         position: fixed;
         left: 0;
-        bottom: 10px;
+        bottom: 100px; /* Ανέβηκε πιο πάνω από το προηγούμενο */
         width: 100%;
         text-align: right;
         padding-right: 20px;
-        font-size: 12px;
-        color: gray;
+        font-size: 14px;
+        font-weight: bold;
+        color: #4F4F4F;
     }
     </style>
     <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
