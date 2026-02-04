@@ -11,7 +11,7 @@ st.markdown(
     <style>
     .stApp {
         background: linear-gradient(180deg, #bae6fd 0%, #f0f9ff 30%, #f0f9ff 70%, #1e3a8a 100%);
-        background-attachment: fixed;
+        background_attachment: fixed;
     }
     
     .block-container {
@@ -38,9 +38,8 @@ st.markdown(
         font-weight: bold;
     }
 
-    /* Ρύθμιση για να ανέβει το Πρόγραμμα και ο πίνακας μισή γραμμή πάνω */
     .program-header {
-        margin-top: -5px !important; /* Ανέβασμα τίτλου */
+        margin-top: -5px !important;
     }
 
     .stTable {
@@ -48,7 +47,7 @@ st.markdown(
         border-radius: 15px !important;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
         padding: 10px;
-        margin-top: -10px; /* Ανέβασμα πίνακα ακόμα πιο κοντά */
+        margin-top: -10px;
     }
 
     hr {
@@ -58,6 +57,7 @@ st.markdown(
         opacity: 0.2;
     }
 
+    /* Programmed by: ΛΕΥΚΑ ΓΡΑΜΜΑΤΑ ΣΕ ΜΑΥΡΟ ΦΟΝΤΟ */
     .footer {
         position: fixed;
         left: 0;
@@ -65,14 +65,21 @@ st.markdown(
         width: 100%;
         text-align: right;
         padding-right: 20px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #000000;
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
         z-index: 999;
     }
+    
+    .footer-label {
+        background-color: #000000; /* Μαύρο φόντο */
+        color: #ffffff;           /* Λευκά γράμματα */
+        padding: 4px 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        display: inline-block;
+    }
     </style>
-    <div class="footer">Programmed by: Κωνσταντίνος Παππάς</div>
+    <div class="footer"><span class="footer-label">Programmed by: Κωνσταντίνος Παππάς</span></div>
     """, 
     unsafe_allow_html=True
 )
@@ -120,7 +127,6 @@ while True:
         st.markdown(f"<h5 class='black-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='black-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
         
-        # Εφαρμογή της κλάσης program-header για να ανέβει
         st.markdown(f"<h4 class='centered-text program-header'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
         
         st.divider()
