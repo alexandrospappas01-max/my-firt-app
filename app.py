@@ -1,51 +1,52 @@
-
 import streamlit as st
 import datetime
 import time
 
 st.title("Το Έξυπνο Ρολόι & Πρόγραμμα 🕒📚")
-st.success("Programized by: Κωνσταντίνος Παππάς!")
+st.success("Κατασκευή: Αλέξανδρος Παππάς!")
 
-# Δημιουργούμε έναν χώρο για το ρολόι και έναν για το πρόγραμμα
+# Λίστα με τις ημέρες στα ελληνικά για την ημερομηνία
+imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
+
+# Δημιουργούμε χώρους (placeholders)
 clock_placeholder = st.empty()
 school_placeholder = st.empty()
 
 while True:
     tora = datetime.datetime.now()
-    
-    # 1. Εμφάνιση Ρολογιού
-    imerominia = f"{tora.day}/{tora.month}/{tora.year}"
-    ora = f"{tora.hour + 2:02d}:{tora.minute:02d}:{tora.second:02d}"
+    mera_num = tora.weekday() # 0=Δευτέρα, 1=Τρίτη κλπ.
+    onoma_meras = imeres_gr[mera_num]
+
+    # 1. Εμφάνιση Ρολογιού με Ημέρα (π.χ. Τετάρτη 4/2/2026)
+    imerominia_full = f"{onoma_meras} {tora.day}/{tora.month}/{tora.year}"
+    ora_full = f"{tora.hour + 2:02d}:{tora.minute:02d}:{tora.second:02d}"
 
     with clock_placeholder.container():
-        st.metric(label="Ημερομηνία", value=imerominia)
-        st.metric(label="Ώρα Ελλάδος", value=ora)
+        st.metric(label="Ημερομηνία", value=imerominia_full)
+        st.metric(label="Ώρα Ελλάδος", value=ora_full)
     
-    # 2. Αυτόματη εμφάνιση προγράμματος ανάλογα με τη μέρα
-    # weekday(): 0=Δευτέρα, 1=Τρίτη, 2=Τετάρτη, 3=Πέμπτη, 4=Παρασκευή
-    mera_num = tora.weekday() 
-
+    # 2. Εμφάνιση Προγράμματος σε Λίστα
     with school_placeholder.container():
-        st.subheader("📖 Το Πρόγραμμα των Μαθημάτων σου:")
+        st.markdown(f"### Το πρόγραμμα των μαθημάτων σου σήμερα: **{onoma_meras}**")
         
         if mera_num == 0: # Δευτέρα
-            st.write("1η Λογοτεχνία | 2η Μαθηματικά | 3η Ιστορία | 4η Γεωγραφία | 5η Οδύσσεια | 6η Γεωγραφία")
-        
+            mathimata = ["1η Λογοτεχνία", "2η Μαθηματικά", "3η Ιστορία", "4η Γεωγραφία", "5η Οδύσσεια", "6η Γεωγραφία"]
         elif mera_num == 1: # Τρίτη
-            st.write("1η Γαλλικά | 2η Αρχαία | 3η Ν.Γλώσσα | 4η Ν.Γλώσσα | 5η Οδύσσεια | 6η Γαλλικά | 7η Αγγλικά")
-            
+            mathimata = ["1η Γαλλικά", "2η Αρχαία", "3η Ν.Γλώσσα", "4η Ν.Γλώσσα", "5η Οδύσσεια", "6η Γαλλικά", "7η Αγγλικά"]
         elif mera_num == 2: # Τετάρτη
-            st.write("1η Μαθηματικά | 2η Πληροφορική | 3η Βιολογία | 4η Γεωμετρία | 5η Εργαστήρια | 6η Οικιακή Οικονομία | 7η Θρησκευτικά")
-            
+            mathimata = ["1η Μαθηματικά", "2η Πληροφορική", "3η Βιολογία", "4η Γεωμετρία", "5η Εργαστήρια Δεξιοτήτων", "6η Οικιακή Οικονομία", "7η Θρησκευτικά"]
         elif mera_num == 3: # Πέμπτη
-            st.write("1η Αρχαία | 2η Λογοτεχνία | 3η Γυμναστική | 4η Ιστορία | 5η Ν.Γλώσσα | 6η Θρησκευτικά")
-            
+            mathimata = ["1η Αρχαία", "2η Λογοτεχνία", "3η Γυμναστική", "4η Ιστορία", "5η Ν.Γλώσσα", "6η Θρησκευτικά"]
         elif mera_num == 4: # Παρασκευή
-            st.write("1η Τεχνολογία | 2η Πληροφορική | 3η Αγγλικά | 4η Φυσική | 5η Γυμναστική")
-            
-        else: # Σαββατοκύριακο
-            st.balloons()
-            st.write("🎉 Είναι Σαββατοκύριακο! Ξεκούραση και παιχνίδι!")
+            mathimata = ["1η Τεχνολογία", "2η Πληροφορική", "3η Αγγλικά", "4η Φυσική", "5η Γυμναστική"]
+        else:
+            mathimata = []
 
-    # Ανανέωση κάθε δευτερόλεπτο
+        if mathimata:
+            for m in mathimata:
+                st.write(f"📍 {m}")
+        else:
+            st.balloons()
+            st.write("🎉 Είναι Σαββατοκύριακο! Ξεκούραση!")
+
     time.sleep(1)
