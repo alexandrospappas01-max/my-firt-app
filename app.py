@@ -53,18 +53,18 @@ st.markdown(
         opacity: 0.2;
     }
 
-    /* Programmed by: Ανέβηκε μισή γραμμή (από 60px σε 75px) */
+    /* Programmed by: Μισή γραμμή κάτω (από 75px σε 65px) και ΜΑΥΡΑ γράμματα */
     .footer {
         position: fixed;
         left: 0;
-        bottom: 75px; 
+        bottom: 65px; 
         width: 100%;
         text-align: right;
         padding-right: 20px;
         font-size: 14px;
         font-weight: bold;
-        color: #ffffff;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        color: #000000; /* ΜΑΥΡΟ ΧΡΩΜΑ */
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9); /* Λευκή σκιά για να φαίνεται στο μπλε */
         z-index: 999;
     }
     </style>
