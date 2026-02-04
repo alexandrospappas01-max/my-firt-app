@@ -5,22 +5,20 @@ import time
 # Ρύθμιση σελίδας
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ΓΙΑ ΑΝΑΔΕΙΞΗ ΜΑΥΡΩΝ ΓΡΑΜΜΑΤΩΝ ---
+# --- STYLE ---
 st.markdown(
     """
     <style>
     .stApp {
-        /* Διαβάθμιση: Πιο ανοιχτό πάνω για να φαίνονται τα μαύρα γράμματα */
         background: linear-gradient(180deg, #bae6fd 0%, #f0f9ff 30%, #f0f9ff 70%, #1e3a8a 100%);
         background-attachment: fixed;
     }
     
     .block-container {
-        padding-top: 3rem; 
+        padding-top: 3.5rem; 
         padding-bottom: 5rem;
     }
     
-    /* Μαύρα γράμματα για το Ρολόι, Ημερομηνία, Ώρα */
     .black-text {
         text-align: center;
         margin-top: 0px;
@@ -40,13 +38,12 @@ st.markdown(
         font-weight: bold;
     }
 
-    /* Ανέβασμα πίνακα 1 γραμμή πάνω */
     .stTable {
         background-color: white !important;
         border-radius: 15px !important;
         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
         padding: 10px;
-        margin-top: -5px; /* Ανέβηκε */
+        margin-top: -5px;
     }
 
     hr {
@@ -56,10 +53,11 @@ st.markdown(
         opacity: 0.2;
     }
 
+    /* Programmed by: Ανέβηκε μισή γραμμή (από 60px σε 75px) */
     .footer {
         position: fixed;
         left: 0;
-        bottom: 50px; 
+        bottom: 75px; 
         width: 100%;
         text-align: right;
         padding-right: 20px;
@@ -114,7 +112,6 @@ while True:
         titlos_2 = f"Επόμενη ({onoma_epomeni})"
 
     with placeholder.container():
-        # Εφαρμογή της κλάσης 'black-text'
         st.markdown("<h3 class='black-text'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='black-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='black-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
