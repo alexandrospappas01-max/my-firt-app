@@ -20,7 +20,7 @@ st.markdown(
         color: #4F4F4F;
     }
     </style>
-    <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
+    <div class="footer">Programized by: Κωνσταντίνος Παππάς</div>
     """,
     unsafe_allow_html=True
 )
