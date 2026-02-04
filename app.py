@@ -1,8 +1,9 @@
 import streamlit as st
 import datetime
+import time
 
 # Ρύθμιση σελίδας
-st.set_page_config(page_title="Πρόγραμμα Κωνσταντίνου", layout="centered")
+st.set_page_config(page_title="School Schedule", layout="centered")
 
 # --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗ ---
 st.markdown(
@@ -20,7 +21,7 @@ st.markdown(
         color: #4F4F4F;
     }
     </style>
-    <div class="footer">Programized by: Κωνσταντίνος Παππάς</div>
+    <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
     """,
     unsafe_allow_html=True
 )
@@ -37,12 +38,12 @@ def get_mathimata(mera_idx):
     return schedule.get(mera_idx, [])
 
 # --- ΚΥΡΙΩΣ ΠΡΟΓΡΑΜΜΑ ---
-st.title("📚 Πρόγραμμα Μαθημάτων")
+st.caption("🕒 Έξυπνο Ρολόι & Πρόγραμμα")
 
 imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
 tora = datetime.datetime.now()
-# Προσαρμογή ώρας Ελλάδος αν το server είναι σε άλλη ζώνη
+# Προσαρμογή ώρας Ελλάδος
 tora_gr = tora + datetime.timedelta(hours=2)
 
 mera_tora = tora_gr.weekday()
@@ -51,15 +52,17 @@ mera_avrio = (mera_tora + 1) % 7
 onoma_tora = imeres_gr[mera_tora]
 onoma_avrio = imeres_gr[mera_avrio]
 
-# Εμφάνιση Ημερομηνίας
-st.info(f"📅 Σήμερα είναι **{onoma_tora} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}**")
+# Εμφάνιση Ημερομηνίας και Ώρας σε μία γραμμή
+imerominia = f"{onoma_tora} {tora_gr.day}/{tora_gr.month}"
+ora = f"{tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}"
+st.info(f"📅 {imerominia} | ⏰ {ora}")
 
 st.divider()
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-    st.subheader(f"✅ Σήμερα ({onoma_tora})")
+    st.write(f"**Σήμερα: {onoma_tora}**")
     list_tora = get_mathimata(mera_tora)
     if list_tora:
         for m in list_tora:
@@ -68,7 +71,7 @@ with col_left:
         st.write("🎉 Ξεκούραση!")
 
 with col_right:
-    st.subheader(f"➡️ Αύριο ({onoma_avrio})")
+    st.write(f"**Αύριο: {onoma_avrio}**")
     list_avrio = get_mathimata(mera_avrio)
     if list_avrio:
         for m in list_avrio:
@@ -76,6 +79,6 @@ with col_right:
     else:
         st.write("🎉 Ξεκούραση!")
 
-# Κουμπί για χειροκίνητη ανανέωση αν χρειαστεί
-if st.button("Ανανέωση Ώρας"):
-    st.rerun()
+# Ανανέωση κάθε 10 δευτερόλεπτα για να μην κουράζεται το App
+time.sleep(10)
+st.rerun()
