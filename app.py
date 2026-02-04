@@ -5,10 +5,31 @@ import time
 # Ρύθμιση σελίδας
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ---
+# --- STYLE ΓΙΑ ΣΥΜΠΑΓΗ ΕΜΦΑΝΙΣΗ ---
 st.markdown(
     """
     <style>
+    /* Μειώνει τα κενά ανάμεσα σε όλα τα στοιχεία του Streamlit */
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
+    }
+    .centered-text {
+        text-align: center;
+        margin-top: -5px;
+        margin-bottom: -5px;
+        line-height: 1.2;
+    }
+    /* Μειώνει το κενό πάνω από τον πίνακα */
+    .stTable {
+        margin-top: -20px;
+    }
+    /* Λεπτή διαχωριστική γραμμή με μικρό κενό */
+    .custom-divider {
+        border-top: 1px solid #e6e9ef;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
     .footer {
         position: fixed;
         left: 0;
@@ -19,10 +40,6 @@ st.markdown(
         font-size: 12px;
         font-weight: bold;
         color: #4F4F4F;
-    }
-    .centered-text {
-        text-align: center;
-        margin-bottom: -10px; /* Μειώνει το κενό ανάμεσα στις γραμμές */
     }
     </style>
     <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
@@ -44,26 +61,24 @@ placeholder = st.empty()
 
 while True:
     tora = datetime.datetime.now()
-    # Ώρα Ελλάδος
     tora_gr = tora + datetime.timedelta(hours=2)
     mera_tora = tora_gr.weekday()
     mera_avrio = (mera_tora + 1) % 7
     imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
     with placeholder.container():
-        # 1. Τίτλος
+        # Τίτλος
         st.markdown("<h3 class='centered-text'>🕒 Έξυπνο Ρολόι &</h3>", unsafe_allow_html=True)
         st.markdown("<h3 class='centered-text'>Πρόγραμμα Μαθημάτων</h3>", unsafe_allow_html=True)
         
-        st.write("") # Μικρό κενό
-
-        # 2. Ημερομηνία και Ώρα με ΤΟ ΙΔΙΟ ΜΕΓΕΘΟΣ (h4)
+        # Ημερομηνία και Ώρα (ίδιο μέγεθος)
         st.markdown(f"<h4 class='centered-text'>📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}</h4>", unsafe_allow_html=True)
         st.markdown(f"<h4 class='centered-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h4>", unsafe_allow_html=True)
         
-        st.divider()
+        # Λεπτή γραμμή αντί για st.divider()
+        st.markdown("<div class='custom-divider'></div>", unsafe_allow_html=True)
 
-        # 3. Πίνακας Μαθημάτων
+        # Πίνακας Μαθημάτων
         math_tora = get_mathimata(mera_tora)
         math_avrio = get_mathimata(mera_avrio)
         
