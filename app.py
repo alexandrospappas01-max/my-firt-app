@@ -2,10 +2,10 @@ import streamlit as st
 import datetime
 import time
 
-# Ρύθμιση για συμπαγή εμφάνιση
-st.set_page_config(page_title="School Clock & Schedule", layout="centered")
+# Ρύθμιση για συμπαγή εμφάνιση και τίτλο
+st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ ΠΙΟ ΨΗΛΑ ---
+# --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ ΠΡΟΓΡΑΜΜΑΤΙΣΤΗ ---
 st.markdown(
     """
     <style>
@@ -16,7 +16,7 @@ st.markdown(
         width: 100%;
         text-align: right;
         padding-right: 20px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: bold;
         color: #4F4F4F;
     }
@@ -26,52 +26,65 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# --- ΣΥΝΑΡΤΗΣΗ ΓΙΑ ΤΑ ΜΑΘΗΜΑΤΑ ---
+def get_mathimata(mera_idx):
+    if mera_idx == 0: # Δευτέρα
+        return ["Λογοτεχνία", "Μαθηματικά", "Ιστορία", "Γεωγραφία", "Οδύσσεια", "Γεωγραφία"]
+    elif mera_idx == 1: # Τρίτη
+        return ["Γαλλικά", "Αρχαία", "Ν.Γλώσσα", "Ν.Γλώσσα", "Οδύσσεια", "Γαλλικά", "Αγγλικά"]
+    elif mera_idx == 2: # Τετάρτη
+        return ["Μαθηματικά", "Πληροφορική", "Βιολογία", "Γεωμετρία", "Εργαστήρια", "Οικ. Οικ.", "Θρησκευτικά"]
+    elif mera_idx == 3: # Πέμπτη
+        return ["Αρχαία", "Λογοτεχνία", "Γυμναστική", "Ιστορία", "Ν.Γλώσσα", "Θρησκευτικά"]
+    elif mera_idx == 4: # Παρασκευή
+        return ["Τεχνολογία", "Πληροφορική", "Αγγλικά", "Φυσική", "Γυμναστική"]
+    else:
+        return []
+
 # --- ΚΥΡΙΩΣ ΠΡΟΓΡΑΜΜΑ ---
-# Ο νέος ανανεωμένος τίτλος
-st.subheader("🕒 Έξυπνο Ρολόι & Πρόγραμμα Μαθημάτων")
+st.caption("🕒 Έξυπνο Ρολόι & Πρόγραμμα")
 
 imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
-col1, col2 = st.columns(2)
-with col1:
-    date_placeholder = st.empty()
-with col2:
-    time_placeholder = st.empty()
+# Ρολόι σε μια γραμμή
+col_time = st.empty()
 
-school_placeholder = st.empty()
+# Χώρος για τα δύο προγράμματα
+schedule_area = st.empty()
 
 while True:
     tora = datetime.datetime.now()
-    mera_num = tora.weekday()
-    onoma_meras = imeres_gr[mera_num]
-
-    # Ημερομηνία και Ώρα (+2 για Ελλάδα)
-    imerominia_full = f"{onoma_meras} {tora.day}/{tora.month}/{tora.year}"
-    ora_full = f"{tora.hour + 2:02d}:{tora.minute:02d}:{tora.second:02d}"
-
-    date_placeholder.caption(f"📅 **{imerominia_full}**")
-    time_placeholder.caption(f"⏰ **{ora_full}**")
+    mera_tora = tora.weekday()
+    # Υπολογισμός επόμενης μέρας (αν είναι Κυριακή (6), η επόμενη είναι Δευτέρα (0))
+    mera_avrio = (mera_tora + 1) % 7
     
-    with school_placeholder.container():
-        st.write(f"**Μαθήματα Ημέρας: {onoma_meras}**")
-        
-        if mera_num == 0: # Δευτέρα
-            mathimata = ["1η Λογοτεχνία", "2η Μαθηματικά", "3η Ιστορία", "4η Γεωγραφία", "5η Οδύσσεια", "6η Γεωγραφία"]
-        elif mera_num == 1: # Τρίτη
-            mathimata = ["1η Γαλλικά", "2η Αρχαία", "3η Ν.Γλώσσα", "4η Ν.Γλώσσα", "5η Οδύσσεια", "6η Γαλλικά", "7η Αγγλικά"]
-        elif mera_num == 2: # Τετάρτη
-            mathimata = ["1η Μαθηματικά", "2η Πληροφορική", "3η Βιολογία", "4η Γεωμετρία", "5η Εργαστήρια", "6η Οικ. Οικονομία", "7η Θρησκευτικά"]
-        elif mera_num == 3: # Πέμπτη
-            mathimata = ["1η Αρχαία", "2η Λογοτεχνία", "3η Γυμναστική", "4η Ιστορία", "5η Ν.Γλώσσα", "6η Θρησκευτικά"]
-        elif mera_num == 4: # Παρασκευή
-            mathimata = ["1η Τεχνολογία", "2η Πληροφορική", "3η Αγγλικά", "4η Φυσική", "5η Γυμναστική"]
-        else:
-            mathimata = []
+    onoma_tora = imeres_gr[mera_tora]
+    onoma_avrio = imeres_gr[mera_avrio]
 
-        if mathimata:
-            for m in mathimata:
-                st.write(f"🔹 {m}")
-        else:
-            st.write("🎉 Σαββατοκύριακο! Ξεκούραση!")
+    # Ενημέρωση Ρολογιού
+    imerominia = f"{onoma_tora} {tora.day}/{tora.month}"
+    ora = f"{tora.hour + 2:02d}:{tora.minute:02d}:{tora.second:02d}"
+    col_time.write(f"📅 {imerominia} | ⏰ {ora}")
+    
+    with schedule_area.container():
+        left, right = st.columns(2)
+        
+        with left:
+            st.write(f"**Σήμερα: {onoma_tora}**")
+            list_tora = get_mathimata(mera_tora)
+            if list_tora:
+                for m in list_tora:
+                    st.write(f"▫️{m}", style="font-size: 12px;")
+            else:
+                st.write("🎉 Ξεκούραση")
+
+        with right:
+            st.write(f"**Αύριο: {onoma_avrio}**")
+            list_avrio = get_mathimata(mera_avrio)
+            if list_avrio:
+                for m in list_avrio:
+                    st.write(f"▫️{m}")
+            else:
+                st.write("🎉 Ξεκούραση")
 
     time.sleep(1)
