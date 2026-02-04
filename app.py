@@ -11,7 +11,7 @@ st.markdown(
     <style>
     .block-container {
         padding-top: 2rem;
-        padding-bottom: 0rem;
+        padding-bottom: 5rem; /* Δίνουμε χώρο στο τέλος για να μην κρύβεται ο πίνακας */
     }
     .centered-text {
         text-align: center;
@@ -19,21 +19,21 @@ st.markdown(
         margin-bottom: 2px;
         line-height: 1.2;
     }
-    /* Ανεβάζουμε τον πίνακα πιο κοντά στον τίτλο */
     .stTable {
         margin-top: -15px;
     }
-    /* Ρύθμιση για το Programmed by */
+    /* Ρύθμιση για το Programmed by - Ανέβηκε κι άλλο */
     .footer {
         position: fixed;
         left: 0;
-        bottom: 40px; /* Ανέβηκε πιο πάνω από πριν */
+        bottom: 80px; /* Ανέβηκε σημαντικά για να φαίνεται σε όλα τα κινητά */
         width: 100%;
         text-align: right;
         padding-right: 20px;
         font-size: 13px;
         font-weight: bold;
         color: #4F4F4F;
+        z-index: 999;
     }
     </style>
     <div class="footer">Programmed by: Κωνσταντίνος Παππάς</div>
@@ -71,7 +71,7 @@ while True:
         
         st.divider()
 
-        # Πίνακας Μαθημάτων (Σύνδεση Σήμερα - Αύριο)
+        # Πίνακας Μαθημάτων
         math_tora = get_mathimata(mera_tora)
         math_avrio = get_mathimata(mera_avrio)
         
