@@ -23,19 +23,18 @@ st.markdown(
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    /* Κατεβάζουμε τον πίνακα 1 γραμμή πιο κάτω */
     .stTable {
-        margin-top: 10px; /* Από -25px το κάναμε θετικό για να κατέβει */
+        margin-top: 10px;
     }
-    /* Προσθήκη κενού στη διαχωριστική γραμμή */
     hr {
         margin-top: 20px !important;
         margin-bottom: 20px !important;
     }
+    /* Programmed by: Κατέβηκε μία γραμμή (από 80px-90px σε 60px) */
     .footer {
         position: fixed;
         left: 0;
-        bottom: 90px; 
+        bottom: 60px; 
         width: 100%;
         text-align: right;
         padding-right: 20px;
