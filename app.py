@@ -5,31 +5,47 @@ import time
 # Ρύθμιση σελίδας
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ---
+# --- STYLE ΜΕ ΧΡΩΜΑ ΣΤΟ BACKGROUND ---
 st.markdown(
     """
     <style>
+    /* Ορισμός φόντου για όλη την εφαρμογή */
+    .stApp {
+        background: linear-gradient(to bottom, #e0f2fe, #f8fafc); /* Απαλό γαλάζιο προς λευκό */
+    }
+    
     .block-container {
         padding-top: 3.5rem; 
         padding-bottom: 5rem;
     }
+    
     .centered-text {
         text-align: center;
         margin-top: 0px;
         margin-bottom: 0px;
         line-height: 1.1;
+        color: #1e3a8a; /* Σκούρο μπλε γράμματα για να ταιριάζουν */
     }
+
+    /* Στυλ για τον πίνακα να φαίνεται καθαρά πάνω στο χρώμα */
+    .stTable {
+        background-color: rgba(255, 255, 255, 0.6); /* Ημιδιάφανο λευκό */
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
     .stSelectbox {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .stTable {
-        margin-top: 10px;
-    }
+
     hr {
         margin-top: 20px !important;
         margin-bottom: 20px !important;
+        border-top: 2px solid #bae6fd !important;
     }
+
     .footer {
         position: fixed;
         left: 0;
@@ -39,7 +55,7 @@ st.markdown(
         padding-right: 20px;
         font-size: 13px;
         font-weight: bold;
-        color: #4F4F4F;
+        color: #1e3a8a;
         z-index: 999;
     }
     </style>
@@ -76,14 +92,12 @@ while True:
     if option == "Αυτόματα (Σήμερα & Αύριο)":
         mera_deikshs_1 = tora_gr.weekday()
         titlos_1 = "Σήμερα"
-        
         mera_deikshs_2 = (mera_deikshs_1 + 1) % 7
         onoma_avrio = imeres_gr[mera_deikshs_2]
         titlos_2 = f"Αύριο ({onoma_avrio})"
     else:
         mera_deikshs_1 = imeres_gr.index(option)
         titlos_1 = option
-        
         mera_deikshs_2 = (mera_deikshs_1 + 1) % 7
         onoma_epomeni = imeres_gr[mera_deikshs_2]
         titlos_2 = f"Επόμενη ({onoma_epomeni})"
