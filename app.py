@@ -1,14 +1,24 @@
 import streamlit as st
 import datetime
-import time
 
-# Ρύθμιση σελίδας
+# Ρύθμιση για να είναι καθαρή η οθόνη
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ & ΚΑΘΑΡΗ ΟΘΟΝΗ ---
+# --- STYLE ΓΙΑ ΤΟ ΟΝΟΜΑ & ΣΤΗΛΕΣ ---
 st.markdown(
     """
     <style>
+    /* Καθαρίζει τα περιττά κενά */
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 0rem;
+    }
+    /* Αναγκάζει τις στήλες να μένουν δίπλα-δίπλα στο κινητό */
+    [data-testid="column"] {
+        width: 50% !important;
+        flex: 1 1 50% !important;
+        min-width: 50% !important;
+    }
     .footer {
         position: fixed;
         left: 0;
@@ -19,13 +29,6 @@ st.markdown(
         font-size: 12px;
         font-weight: bold;
         color: #4F4F4F;
-        z-index: 100;
-    }
-    /* Αναγκάζει τις στήλες να μένουν δίπλα-δίπλα */
-    [data-testid="column"] {
-        width: 50% !important;
-        flex: 1 1 50% !important;
-        min-width: 50% !important;
     }
     </style>
     <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
@@ -43,43 +46,37 @@ def get_mathimata(mera_idx):
     }
     return schedule.get(mera_idx, [])
 
-# --- ΚΥΡΙΩΣ ΠΛΑΙΣΙΟ ΠΟΥ ΚΑΘΑΡΙΖΕΙ ---
-placeholder = st.empty()
+# --- ΕΜΦΑΝΙΣΗ ΠΡΟΓΡΑΜΜΑΤΟΣ ---
+st.caption("🕒 Έξυπνο Ρολόι & Πρόγραμμα")
 
-while True:
-    tora = datetime.datetime.now()
-    tora_gr = tora + datetime.timedelta(hours=2)
-    mera_tora = tora_gr.weekday()
-    mera_avrio = (mera_tora + 1) % 7
-    imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
+imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
+tora = datetime.datetime.now()
+# Ώρα Ελλάδος
+tora_gr = tora + datetime.timedelta(hours=2)
+mera_tora = tora_gr.weekday()
+mera_avrio = (mera_tora + 1) % 7
 
-    with placeholder.container():
-        st.caption("🕒 Έξυπνο Ρολόι & Πρόγραμμα")
-        
-        # Μπλε πλαίσιο ώρας
-        st.info(f"📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month} | ⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}")
-        
-        st.divider()
+# Μπλε πλαίσιο με την ώρα (σταθερό, χωρίς δευτερόλεπτα που τρέχουν για να μην κολλάει)
+st.info(f"📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month} | ⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}")
 
-        col_left, col_right = st.columns(2)
+st.divider()
 
-        with col_left:
-            st.write("**Σήμερα**")
-            math_tora = get_mathimata(mera_tora)
-            if math_tora:
-                for m in math_tora:
-                    st.write(f"🔹 {m}")
-            else:
-                st.write("🎉 Ξεκούραση")
+col_left, col_right = st.columns(2)
 
-        with col_right:
-            st.write("**Αύριο**")
-            math_avrio = get_mathimata(mera_avrio)
-            if math_avrio:
-                for m in math_avrio:
-                    st.write(f"🔹 {m}")
-            else:
-                st.write("🎉 Ξεκούραση")
+with col_left:
+    st.write("**Σήμερα**")
+    math_tora = get_mathimata(mera_tora)
+    if math_tora:
+        for m in math_tora:
+            st.write(f"🔹 {m}")
+    else:
+        st.write("🎉 Ξεκούραση")
 
-    # Ανανέωση κάθε 1 δευτερόλεπτο για το ρολόι, αλλά χωρίς rerun για να μη διπλασιάζεται
-    time.sleep(1)
+with col_right:
+    st.write("**Αύριο**")
+    math_avrio = get_mathimata(mera_avrio)
+    if math_avrio:
+        for m in math_avrio:
+            st.write(f"🔹 {m}")
+    else:
+        st.write("🎉 Ξεκούραση")
