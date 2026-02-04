@@ -5,13 +5,13 @@ import time
 # Ρύθμιση σελίδας
 st.set_page_config(page_title="School Schedule", layout="centered")
 
-# --- STYLE ΓΙΑ ΑΝΑΔΕΙΞΗ ΓΡΑΜΜΑΤΩΝ & ΔΙΠΛΟ GRADIENT ---
+# --- STYLE ΓΙΑ ΑΝΑΔΕΙΞΗ ΜΑΥΡΩΝ ΓΡΑΜΜΑΤΩΝ ---
 st.markdown(
     """
     <style>
     .stApp {
-        /* Διαβάθμιση: Σκούρο μπλε πάνω/κάτω, πολύ ανοιχτό στο κέντρο */
-        background: linear-gradient(180deg, #1e3a8a 0%, #f0f9ff 35%, #f0f9ff 65%, #1e3a8a 100%);
+        /* Διαβάθμιση: Πιο ανοιχτό πάνω για να φαίνονται τα μαύρα γράμματα */
+        background: linear-gradient(180deg, #bae6fd 0%, #f0f9ff 30%, #f0f9ff 70%, #1e3a8a 100%);
         background-attachment: fixed;
     }
     
@@ -20,7 +20,17 @@ st.markdown(
         padding-bottom: 5rem;
     }
     
-    /* Ανάδειξη τίτλων με σκιά για να "βγαίνουν" μπροστά */
+    /* Μαύρα γράμματα για το Ρολόι, Ημερομηνία, Ώρα */
+    .black-text {
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        line-height: 1.1;
+        color: #000000 !important;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+    }
+    
     .centered-text {
         text-align: center;
         margin-top: 0px;
@@ -28,35 +38,24 @@ st.markdown(
         line-height: 1.2;
         color: #0f172a;
         font-weight: bold;
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-    }
-    
-    /* Ο τίτλος στην κορυφή που είναι πάνω στο σκούρο χρώμα */
-    .top-title {
-        color: #ffffff !important;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
     }
 
-    /* Πίνακας με έντονο λευκό φόντο και σκιές στις γωνίες */
+    /* Ανέβασμα πίνακα 1 γραμμή πάνω */
     .stTable {
         background-color: white !important;
         border-radius: 15px !important;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        padding: 15px;
-        margin-top: 15px;
-    }
-
-    .stSelectbox {
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-top: -5px; /* Ανέβηκε */
     }
 
     hr {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
         border-top: 2px solid #1e3a8a !important;
         opacity: 0.2;
     }
 
-    /* Programmed by: Λευκά γράμματα γιατί είναι πάνω στο σκούρο μπλε κάτω μέρος */
     .footer {
         position: fixed;
         left: 0;
@@ -115,12 +114,12 @@ while True:
         titlos_2 = f"Επόμενη ({onoma_epomeni})"
 
     with placeholder.container():
-        # Εδώ χρησιμοποιούμε την κλάση 'top-title' για τα πάνω γράμματα
-        st.markdown("<h3 class='centered-text top-title'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h5 class='centered-text top-title'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
-        st.markdown(f"<h5 class='centered-text top-title'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
+        # Εφαρμογή της κλάσης 'black-text'
+        st.markdown("<h3 class='black-text'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h5 class='black-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}</h5>", unsafe_allow_html=True)
+        st.markdown(f"<h5 class='black-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
         
-        st.markdown(f"<h4 class='centered-text' style='margin-top:15px;'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
+        st.markdown(f"<h4 class='centered-text' style='margin-top:10px;'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
         
         st.divider()
 
