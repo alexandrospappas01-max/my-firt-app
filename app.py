@@ -20,9 +20,9 @@ st.markdown(
         font-weight: bold;
         color: #4F4F4F;
     }
-    /* Στοίχιση κειμένου στο κέντρο για τον τίτλο και το ρολόι */
     .centered-text {
         text-align: center;
+        margin-bottom: -10px; /* Μειώνει το κενό ανάμεσα στις γραμμές */
     }
     </style>
     <div class="footer">Προγραμματιστής: Κωνσταντίνος Παππάς</div>
@@ -51,13 +51,15 @@ while True:
     imeres_gr = ["Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο", "Κυριακή"]
 
     with placeholder.container():
-        # 1. Τίτλος σε δύο γραμμές
+        # 1. Τίτλος
         st.markdown("<h3 class='centered-text'>🕒 Έξυπνο Ρολόι &</h3>", unsafe_allow_html=True)
         st.markdown("<h3 class='centered-text'>Πρόγραμμα Μαθημάτων</h3>", unsafe_allow_html=True)
         
-        # 2. Ημερομηνία και από κάτω Ώρα
+        st.write("") # Μικρό κενό
+
+        # 2. Ημερομηνία και Ώρα με ΤΟ ΙΔΙΟ ΜΕΓΕΘΟΣ (h4)
         st.markdown(f"<h4 class='centered-text'>📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}</h4>", unsafe_allow_html=True)
-        st.markdown(f"<h2 class='centered-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h4 class='centered-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h4>", unsafe_allow_html=True)
         
         st.divider()
 
