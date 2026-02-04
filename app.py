@@ -66,7 +66,7 @@ while True:
         st.markdown('<div class="big-title">🕒 Έξυπνο Ρολόι & Πρόγραμμα Μαθημάτων</div>', unsafe_allow_html=True)
         
         # Μεγάλο πλαίσιο ώρας
-        st.info(f"### 📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}       |                                                                                                                                                                                                                                                       ⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}")
+        st.info(f"### 📅 {imeres_gr[mera_tora]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year}                    ⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}")
         
         st.write("---")
 
