@@ -57,11 +57,11 @@ st.markdown(
         opacity: 0.2;
     }
 
-    /* Programmed by: ΛΕΥΚΑ ΓΡΑΜΜΑΤΑ ΣΕ ΜΑΥΡΟ ΦΟΝΤΟ */
+    /* Programmed by: ΚΑΤΕΒΗΚΕ μισή γραμμή (50px) */
     .footer {
         position: fixed;
         left: 0;
-        bottom: 65px; 
+        bottom: 50px; 
         width: 100%;
         text-align: right;
         padding-right: 20px;
@@ -69,8 +69,8 @@ st.markdown(
     }
     
     .footer-label {
-        background-color: #000000; /* Μαύρο φόντο */
-        color: #ffffff;           /* Λευκά γράμματα */
+        background-color: #000000; 
+        color: #ffffff;           
         padding: 4px 12px;
         border-radius: 8px;
         font-size: 14px;
