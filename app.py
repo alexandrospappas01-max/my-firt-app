@@ -124,7 +124,7 @@ while True:
 
     with placeholder.container():
         st.markdown("<h3 class='black-text'>🕒 Έξυπνο Ρολόι</h3>", unsafe_allow_html=True)
-        st.markdown(f"<h5 class='black-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year} το</h5>", unsafe_allow_html=True)
+        st.markdown(f"<h5 class='black-text'>📅 {imeres_gr[tora_gr.weekday()]} {tora_gr.day}/{tora_gr.month}/{tora_gr.year} </h5>", unsafe_allow_html=True)
         st.markdown(f"<h5 class='black-text'>⏰ {tora_gr.hour:02d}:{tora_gr.minute:02d}:{tora_gr.second:02d}</h5>", unsafe_allow_html=True)
         
         st.markdown(f"<h4 class='centered-text program-header'>📚 Πρόγραμμα: {titlos_1}</h4>", unsafe_allow_html=True)
